@@ -31,8 +31,8 @@ export default {
     signin(){
       const api = `${process.env.API_HOST}/admin/signin`;
       const vm = this;
-      console.log(api, vm.user);
       this.$http.post(api, vm.user).then((response) => {
+        console.log(response.data);
         if(response.data.success){
           vm.$router.push('/');
         }

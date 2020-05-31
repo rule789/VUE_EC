@@ -27,13 +27,15 @@ new Vue({
 router.beforeEach((to, from, next) => {
   if(to.meta.requiresAuth){
     const api = `${process.env.API_HOST}/api/user/check`;
-    axios.get(api).then((response) => {
-      console.log(response.data)
+    axios.post(api).then((response) => {
+      console.log('check', response.data)
       if(response.data.success){
         next();
       } else {
         next({ path: '/login' })
       }
     })
+  } else {
+    next();
   }
 })
