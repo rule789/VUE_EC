@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import Dashboard from '@/components/dashboard'
 import Login from '@/components/pages/login'
 import Product from '@/components/pages/Product'
+import CustomerOrders from '@/components/pages/CustomerOrders'
+import CustomerCheckout from '@/components/pages/CustomerCheckout'
 
 Vue.use(Router)
  
@@ -13,12 +15,12 @@ export default new Router({
       path: '*',
       redirect: '/login'
     },
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld,
-      meta: { requiresAuth: true }
-    },
+    // {
+    //   path: '/',
+    //   name: 'HelloWorld',
+    //   component: HelloWorld,
+    //   meta: { requiresAuth: true }
+    // },
     {
       path: '/login',
       name: 'Login',
@@ -34,6 +36,23 @@ export default new Router({
           name: 'Product',
           component: Product,
           meta: { requiresAuth: true },
+        }
+      ]
+    },
+    {
+      path: '/',
+      name: 'Dashboard',
+      component: Dashboard,
+      children: [
+        {
+          path: 'customer_orders',
+          name: 'CustomerOrders',
+          component: CustomerOrders,
+        },
+        {
+          path: 'customer_checkout/:orderId',
+          name: 'CustomerCheckout',
+          component: CustomerCheckout,
         }
       ]
     },
